@@ -1,0 +1,67 @@
+<!-- 
+Name: Sarandeep Singh
+ID: C0888634
+Assignment 7 DOM 
+-->
+<html>
+  <font size="8" color="green">Final test lab</font><br /><br />
+  Number of rows:
+  <input type="text" id="t1" /><br /><br />
+  Number of cols:
+  <input type="text" id="t2" /><br /><br />
+  <button id="b1" onclick="generateTable()">Generate Table</button
+  ><br /><br />
+  <button id="b2" onclick="addColumn()">Add Column</button>
+  <button id="b3" onclick="addRow()">Add Row</button>
+  <!-- Javascript  -->
+  <script language="javascript">
+	// Function to generate Table
+    function generateTable() {
+      var rows = document.getElementById("t1").value;
+      var cols = document.getElementById("t2").value;
+      var table = document.createElement("table");
+      table.id = "myTable";
+      for (var i = 0; i < rows; i++) {
+        var row = table.insertRow();
+        for (var j = 0; j < cols; j++) {
+          var cell = row.insertCell();
+          cell.textContent = "Row " + (i + 1) + " Col " + (j + 1);
+          // Add border to cells
+		  cell.style.border = "1px solid black"; 
+        }
+      }
+      document.body.appendChild(table);
+      // Wipe elements that are not needed
+      document.getElementById("t1").style.display = "none";
+      document.getElementById("t2").style.display = "none";
+      document.getElementById("b1").style.display = "none";
+    }
+	// Function to addColumn when button is clicked
+    function addColumn() {
+      var table = document.getElementById("myTable");
+      if (!table) return;
+
+      var rows = table.getElementsByTagName("tr");
+      for (var i = 0; i < rows.length; i++) {
+        var cell = rows[i].insertCell();
+        cell.textContent =
+          "Row " + (i + 1) + " Col " + (rows[i].children.length + 1);
+        // Add border to the newly added cell when column is added
+        cell.style.border = "1px solid black";
+      }
+    }
+	// Function to addRow when button is clicked
+    function addRow() {
+      var table = document.getElementById("myTable");
+      if (!table) return;
+      var row = table.insertRow();
+      var cells = table.rows[0].cells.length;
+      for (var i = 0; i < cells; i++) {
+        var cell = row.insertCell();
+        cell.textContent = "Row " + table.rows.length + " Col " + (i + 1);
+        // Add border to the new cells when row is added
+        cell.style.border = "1px solid black";
+      }
+    }
+  </script>
+</html>
